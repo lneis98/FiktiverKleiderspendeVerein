@@ -115,7 +115,34 @@ export const CONFIG = {
     PHONE: /^[\d\s\-\+\(\)]+$/,
     ZIP_CODE: /^\d{4,10}$/,
     REFERENCE_NUMBER: /^KS\d{10}$/
-  }
+  },
+
+  // Shared form options — single source of truth for both Pickup and Dropoff forms
+  FORM_CLOTHING_TYPES: [
+    { value: 'shirts',      icon: '👔', label: 'Hemden & T-Shirts' },
+    { value: 'pants',       icon: '👖', label: 'Hosen & Jeans'    },
+    { value: 'dresses',     icon: '👗', label: 'Kleider & Röcke'  },
+    { value: 'jackets',     icon: '🧥', label: 'Jacken & Mäntel'  },
+    { value: 'sweaters',    icon: '🧶', label: 'Pullover'          },
+    { value: 'children',    icon: '🍼', label: 'Kinderkleidung'    },
+    { value: 'shoes',       icon: '👟', label: 'Schuhe'            },
+    { value: 'accessories', icon: '🧣', label: 'Accessoires'       }
+  ],
+
+  FORM_QUANTITY_OPTIONS: [
+    { value: 'small',  icon: '📦',       label: 'Klein (1–2 Taschen/Kartons)', desc: 'bis 20 kg'   },
+    { value: 'medium', icon: '📦📦',     label: 'Mittel (3–5 Taschen/Kartons)', desc: '20–50 kg'  },
+    { value: 'large',  icon: '📦📦📦',   label: 'Groß (6+ Taschen/Kartons)',   desc: 'über 50 kg' }
+  ],
+
+  CRISIS_AREAS: [
+    { value: 'ukraine',     flag: '🇺🇦', label: 'Ukraine'     },
+    { value: 'syria',       flag: '🇸🇾', label: 'Syrien'      },
+    { value: 'afghanistan', flag: '🇦🇫', label: 'Afghanistan' },
+    { value: 'yemen',       flag: '🇾🇪', label: 'Jemen'       },
+    { value: 'somalia',     flag: '🇸🇴', label: 'Somalia'     },
+    { value: 'haiti',       flag: '🇭🇹', label: 'Haiti'       }
+  ]
 };
 
 export default CONFIG;

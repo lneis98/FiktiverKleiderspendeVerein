@@ -21,10 +21,11 @@
         </div>
 
         <form @submit.prevent="handleSubmit" class="register-form" novalidate>
-          <!-- Step 1: Personal Information -->
+
+          <!-- Schritt 1: Kontaktdaten -->
           <div class="form-step mb-10">
             <div class="step-header flex items-start mb-6">
-              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0">
+              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0" aria-hidden="true">
                 1
               </div>
               <div class="step-info">
@@ -75,10 +76,10 @@
             </div>
           </div>
 
-          <!-- Step 2: Address Information -->
+          <!-- Schritt 2: Adresse -->
           <div class="form-step mb-10">
             <div class="step-header flex items-start mb-6">
-              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0">
+              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0" aria-hidden="true">
                 2
               </div>
               <div class="step-info">
@@ -130,10 +131,10 @@
             />
           </div>
 
-          <!-- Step 3: Donation Details -->
+          <!-- Schritt 3: Spendendetails -->
           <div class="form-step mb-10">
             <div class="step-header flex items-start mb-6">
-              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0">
+              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0" aria-hidden="true">
                 3
               </div>
               <div class="step-info">
@@ -142,16 +143,17 @@
               </div>
             </div>
 
-            <!-- Clothing Type Selection -->
-            <div class="form-group mb-6">
-              <label class="form-label block text-sm font-semibold text-gray-700 mb-3">
-                Art der Kleidung <span class="text-red-500">*</span>
-              </label>
+            <!-- Kleidungsauswahl — aria-pressed kommuniziert Zustand an Screenreader -->
+            <fieldset class="form-group mb-6">
+              <legend class="block text-sm font-semibold text-gray-700 mb-3">
+                Art der Kleidung <span class="text-red-500" aria-hidden="true">*</span>
+              </legend>
               <div class="grid md:grid-cols-2 gap-3">
                 <button
                   v-for="item in clothingTypes"
                   :key="item.value"
                   type="button"
+                  :aria-pressed="formData.clothing.includes(item.value)"
                   @click="toggleClothingType(item.value)"
                   :class="[
                     'selection-item text-left p-4 rounded-lg border-2 transition-all duration-200',
@@ -160,24 +162,25 @@
                       : 'border-gray-200 hover:border-purple-300'
                   ]"
                 >
-                  <span class="text-3xl mr-3">{{ item.icon }}</span>
+                  <span class="text-3xl mr-3" aria-hidden="true">{{ item.icon }}</span>
                   <span class="font-medium">{{ item.label }}</span>
-                  <span v-if="formData.clothing.includes(item.value)" class="float-right text-purple-600">✔️</span>
+                  <span v-if="formData.clothing.includes(item.value)" class="float-right text-purple-600" aria-hidden="true">✔️</span>
                 </button>
               </div>
-              <div v-if="errors.clothing" class="text-red-500 text-sm mt-2">{{ errors.clothing }}</div>
-            </div>
+              <p v-if="errors.clothing" role="alert" class="text-red-500 text-sm mt-2">{{ errors.clothing }}</p>
+            </fieldset>
 
-            <!-- Quantity Selection -->
-            <div class="form-group">
-              <label class="form-label block text-sm font-semibold text-gray-700 mb-3">
-                Geschätzte Menge <span class="text-red-500">*</span>
-              </label>
+            <!-- Mengenauswahl -->
+            <fieldset class="form-group">
+              <legend class="block text-sm font-semibold text-gray-700 mb-3">
+                Geschätzte Menge <span class="text-red-500" aria-hidden="true">*</span>
+              </legend>
               <div class="grid md:grid-cols-3 gap-3">
                 <button
                   v-for="item in quantityOptions"
                   :key="item.value"
                   type="button"
+                  :aria-pressed="formData.quantity === item.value"
                   @click="formData.quantity = item.value; validateField('quantity')"
                   :class="[
                     'selection-item text-left p-4 rounded-lg border-2 transition-all duration-200',
@@ -186,20 +189,20 @@
                       : 'border-gray-200 hover:border-purple-300'
                   ]"
                 >
-                  <div class="text-2xl mb-2">{{ item.icon }}</div>
+                  <div class="text-2xl mb-2" aria-hidden="true">{{ item.icon }}</div>
                   <div class="font-medium mb-1">{{ item.label }}</div>
                   <div class="text-xs text-gray-500">{{ item.desc }}</div>
-                  <span v-if="formData.quantity === item.value" class="absolute top-3 right-3 text-purple-600">✔️</span>
+                  <span v-if="formData.quantity === item.value" class="absolute top-3 right-3 text-purple-600" aria-hidden="true">✔️</span>
                 </button>
               </div>
-              <div v-if="errors.quantity" class="text-red-500 text-sm mt-2">{{ errors.quantity }}</div>
-            </div>
+              <p v-if="errors.quantity" role="alert" class="text-red-500 text-sm mt-2">{{ errors.quantity }}</p>
+            </fieldset>
           </div>
 
-          <!-- Step 4: Crisis Area -->
+          <!-- Schritt 4: Zielgebiet -->
           <div class="form-step mb-10">
             <div class="step-header flex items-start mb-6">
-              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0">
+              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0" aria-hidden="true">
                 4
               </div>
               <div class="step-info">
@@ -208,31 +211,35 @@
               </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-3">
-              <button
-                v-for="country in countries"
-                :key="country.value"
-                type="button"
-                @click="formData.crisisArea = country.value; validateField('crisisArea')"
-                :class="[
-                  'selection-item text-left p-4 rounded-lg border-2 transition-all duration-200',
-                  formData.crisisArea === country.value
-                    ? 'border-purple-600 bg-purple-50'
-                    : 'border-gray-200 hover:border-purple-300'
-                ]"
-              >
-                <span class="text-3xl mr-3">{{ country.flag }}</span>
-                <span class="font-medium">{{ country.label }}</span>
-                <span v-if="formData.crisisArea === country.value" class="float-right text-purple-600">✔️</span>
-              </button>
-            </div>
-            <div v-if="errors.crisisArea" class="text-red-500 text-sm mt-2">{{ errors.crisisArea }}</div>
+            <fieldset>
+              <legend class="sr-only">Krisengebiet auswählen</legend>
+              <div class="grid md:grid-cols-2 gap-3">
+                <button
+                  v-for="country in crisisAreas"
+                  :key="country.value"
+                  type="button"
+                  :aria-pressed="formData.crisisArea === country.value"
+                  @click="formData.crisisArea = country.value; validateField('crisisArea')"
+                  :class="[
+                    'selection-item text-left p-4 rounded-lg border-2 transition-all duration-200',
+                    formData.crisisArea === country.value
+                      ? 'border-purple-600 bg-purple-50'
+                      : 'border-gray-200 hover:border-purple-300'
+                  ]"
+                >
+                  <span class="text-3xl mr-3" aria-hidden="true">{{ country.flag }}</span>
+                  <span class="font-medium">{{ country.label }}</span>
+                  <span v-if="formData.crisisArea === country.value" class="float-right text-purple-600" aria-hidden="true">✔️</span>
+                </button>
+              </div>
+              <p v-if="errors.crisisArea" role="alert" class="text-red-500 text-sm mt-2">{{ errors.crisisArea }}</p>
+            </fieldset>
           </div>
 
-          <!-- Step 5: Pickup Date -->
+          <!-- Schritt 5: Abholtermin -->
           <div class="form-step mb-10">
             <div class="step-header flex items-start mb-6">
-              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0">
+              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0" aria-hidden="true">
                 5
               </div>
               <div class="step-info">
@@ -244,12 +251,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="w-full">
                 <label class="form-label block text-sm font-semibold text-gray-700 mb-3">
-                  Wunschtermin <span class="text-red-500">*</span>
+                  Wunschtermin <span class="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <div class="grid grid-cols-3 gap-2">
-                  <!-- Tag -->
                   <div>
+                    <label for="pickup-day" class="sr-only">Tag</label>
                     <select
+                      id="pickup-day"
                       v-model="formData.pickupDateDay"
                       @change="updatePickupDate"
                       class="w-full px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
@@ -260,9 +268,10 @@
                       </option>
                     </select>
                   </div>
-                  <!-- Monat -->
                   <div>
+                    <label for="pickup-month" class="sr-only">Monat</label>
                     <select
+                      id="pickup-month"
                       v-model="formData.pickupDateMonth"
                       @change="updatePickupDate"
                       class="w-full px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
@@ -282,42 +291,45 @@
                       <option value="12">Dezember</option>
                     </select>
                   </div>
-                  <!-- Jahr -->
                   <div>
+                    <label for="pickup-year" class="sr-only">Jahr</label>
                     <select
+                      id="pickup-year"
                       v-model="formData.pickupDateYear"
                       @change="updatePickupDate"
                       class="w-full px-2 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 text-sm"
                     >
                       <option value="">Jahr</option>
-                      <option v-for="year in getYearOptions" :key="year" :value="String(year)">
+                      <option v-for="year in yearOptions" :key="year" :value="String(year)">
                         {{ year }}
                       </option>
                     </select>
                   </div>
                 </div>
-                <p v-if="errors.pickupDate" class="text-red-500 text-sm mt-2">{{ errors.pickupDate }}</p>
+                <p v-if="errors.pickupDate" role="alert" class="text-red-500 text-sm mt-2">{{ errors.pickupDate }}</p>
               </div>
+
               <div class="form-group w-full">
-                <label class="form-label block text-sm font-semibold text-gray-700 mb-2">
+                <label for="pickup-time" class="form-label block text-sm font-semibold text-gray-700 mb-2">
                   Bevorzugte Uhrzeit
                 </label>
                 <select
+                  id="pickup-time"
                   v-model="formData.pickupTime"
                   class="form-select w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
                 >
-                  <option value="morning">Vormittags (8-12 Uhr)</option>
-                  <option value="afternoon">Nachmittags (12-16 Uhr)</option>
-                  <option value="evening">Spätnachmittags (16-18 Uhr)</option>
+                  <option value="morning">Vormittags (8–12 Uhr)</option>
+                  <option value="afternoon">Nachmittags (12–16 Uhr)</option>
+                  <option value="evening">Spätnachmittags (16–18 Uhr)</option>
                 </select>
               </div>
             </div>
           </div>
 
-          <!-- Step 6: Additional Info -->
+          <!-- Schritt 6: Zusätzliche Hinweise -->
           <div class="form-step mb-8">
             <div class="step-header flex items-start mb-6">
-              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0">
+              <div class="step-number bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4 flex-shrink-0" aria-hidden="true">
                 6
               </div>
               <div class="step-info">
@@ -326,33 +338,42 @@
               </div>
             </div>
 
+            <!-- Textarea mit explizitem Label — WCAG SC 1.3.1 -->
+            <label for="pickup-comments" class="block text-sm font-semibold text-gray-700 mb-2">
+              Anmerkungen <span class="text-gray-400 font-normal">(optional)</span>
+            </label>
             <textarea
+              id="pickup-comments"
               v-model="formData.comments"
               placeholder="Haben Sie zusätzliche Anmerkungen zu Ihrer Spende oder Fragen an uns?"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900"
               rows="4"
             ></textarea>
 
-            <!-- Terms Checkbox -->
+            <!-- Datenschutz-Checkbox mit explizitem id/for-Paar -->
             <div class="mt-6">
-              <label class="flex items-start cursor-pointer">
+              <div class="flex items-start gap-3">
                 <input
+                  id="pickup-terms"
                   v-model="formData.terms"
                   type="checkbox"
-                  class="mt-1 mr-3 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                  class="mt-1 w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 flex-shrink-0"
+                  :aria-invalid="!!errors.terms"
+                  :aria-describedby="errors.terms ? 'pickup-terms-error' : undefined"
                   required
                 />
-                <span class="text-sm text-gray-700">
-                  Ich akzeptiere die 
+                <label for="pickup-terms" class="text-sm text-gray-700 cursor-pointer">
+                  Ich akzeptiere die
                   <router-link to="/datenschutz" class="text-purple-600 hover:underline">Datenschutzbestimmungen</router-link>
-                  und erkläre mich mit der Verarbeitung meiner Daten einverstanden. <span class="text-red-500">*</span>
-                </span>
-              </label>
-              <div v-if="errors.terms" class="text-red-500 text-sm mt-2">{{ errors.terms }}</div>
+                  und erkläre mich mit der Verarbeitung meiner Daten einverstanden.
+                  <span class="text-red-500" aria-hidden="true">*</span>
+                </label>
+              </div>
+              <p v-if="errors.terms" id="pickup-terms-error" role="alert" class="text-red-500 text-sm mt-2">{{ errors.terms }}</p>
             </div>
           </div>
 
-          <!-- Submit Button -->
+          <!-- Absenden -->
           <div class="flex justify-center">
             <BaseButton
               native-type="submit"
@@ -376,354 +397,207 @@ import { useRouter } from 'vue-router'
 import BaseInput from '@/components/ui/BaseInput.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import { useDonationStore } from '@/stores/donationStore'
+import { useUIStore } from '@/stores/uiStore'
 import ValidationService from '@/services/validationService'
+import CONFIG from '@/utils/constants'
 
 const router = useRouter()
 const donationStore = useDonationStore()
+const uiStore = useUIStore()
 const isSubmitting = ref(false)
 
+// ── Shared form options aus constants.js — Single Source of Truth ──────────
+const clothingTypes  = CONFIG.FORM_CLOTHING_TYPES
+const quantityOptions = CONFIG.FORM_QUANTITY_OPTIONS
+const crisisAreas    = CONFIG.CRISIS_AREAS
+
+// ── Formular-State ─────────────────────────────────────────────────────────
 const formData = reactive({
-  firstName: '',
-  lastName: '',
-  phone: '',
-  email: '',
-  street: '',
-  plz: '',
-  city: '',
-  addressNotes: '',
-  clothing: [],
-  quantity: '',
-  crisisArea: '',
-  pickupDate: '',
-  pickupDateDay: '',
+  firstName:       '',
+  lastName:        '',
+  phone:           '',
+  email:           '',
+  street:          '',
+  plz:             '',
+  city:            '',
+  addressNotes:    '',
+  clothing:        [],
+  quantity:        '',
+  crisisArea:      '',
+  pickupDate:      '',
+  pickupDateDay:   '',
   pickupDateMonth: '',
-  pickupDateYear: '',
-  pickupTime: 'morning',
-  comments: '',
-  terms: false
+  pickupDateYear:  '',
+  pickupTime:      'morning',
+  comments:        '',
+  terms:           false
 })
-
-// Computed property for year options (tomorrow + 2 years)
-const getYearOptions = computed(() => {
-  const today = new Date()
-  const tomorrow = new Date(today)
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  const startYear = tomorrow.getFullYear()
-  const years = []
-  for (let i = 0; i <= 2; i++) {
-    years.push(startYear + i)
-  }
-  return years
-})
-
-// Update pickupDate from dropdown values
-const updatePickupDate = () => {
-  if (formData.pickupDateDay && formData.pickupDateMonth && formData.pickupDateYear) {
-    formData.pickupDate = `${formData.pickupDateYear}-${formData.pickupDateMonth}-${formData.pickupDateDay}`
-    validateField('pickupDate')
-  } else {
-    formData.pickupDate = ''
-  }
-}
 
 const errors = reactive({})
 
-const clothingTypes = [
-  { value: 'shirts', icon: '👔', label: 'Hemden & T-Shirts' },
-  { value: 'pants', icon: '👖', label: 'Hosen & Jeans' },
-  { value: 'dresses', icon: '👗', label: 'Kleider & Röcke' },
-  { value: 'jackets', icon: '🧥', label: 'Jacken & Mäntel' },
-  { value: 'sweaters', icon: '🧶', label: 'Pullover' },
-  { value: 'children', icon: '🍼', label: 'Kinderkleidung' },
-  { value: 'shoes', icon: '👟', label: 'Schuhe' },
-  { value: 'accessories', icon: '🧣', label: 'Accessoires' }
-]
+// ── Jahresoptionen: ab morgen, 2 Jahre in die Zukunft ──────────────────────
+const yearOptions = computed(() => {
+  const year = new Date().getFullYear()
+  return [year, year + 1, year + 2]
+})
 
-const quantityOptions = [
-  { value: 'small', icon: '📦', label: 'Klein (1-2 Taschen/Kartons)', desc: 'bis 20kg' },
-  { value: 'medium', icon: '📦📦', label: 'Mittel (3-5 Taschen/Kartons)', desc: '20-50kg' },
-  { value: 'large', icon: '📦📦📦', label: 'Groß (6+ Taschen/Kartons)', desc: 'über 50kg' }
-]
-
-const countries = [
-  { value: 'ukraine', flag: '🇺🇦', label: 'Ukraine' },
-  { value: 'syria', flag: '🇸🇾', label: 'Syrien' },
-  { value: 'afghanistan', flag: '🇦🇫', label: 'Afghanistan' },
-  { value: 'yemen', flag: '🇾🇪', label: 'Jemen' },
-  { value: 'somalia', flag: '🇸🇴', label: 'Somalia' },
-  { value: 'haiti', flag: '🇭🇹', label: 'Haiti' }
-]
-
-const toggleClothingType = (value) => {
-  const index = formData.clothing.indexOf(value)
-  if (index > -1) {
-    formData.clothing.splice(index, 1)
+const updatePickupDate = () => {
+  if (formData.pickupDateDay && formData.pickupDateMonth && formData.pickupDateYear) {
+    formData.pickupDate = `${formData.pickupDateYear}-${formData.pickupDateMonth}-${formData.pickupDateDay}`
   } else {
-    formData.clothing.push(value)
+    formData.pickupDate = ''
   }
-  // Validate clothing selection on change
-  validateField('clothing')
+  validateField('pickupDate')
 }
 
+// ── Einzelfeld-Validierung (wird bei blur UND beim Submit-Sammeldurchlauf genutzt) ──
 const validateField = (fieldName) => {
-  // Clear existing error for this field
   delete errors[fieldName]
 
-  switch(fieldName) {
+  switch (fieldName) {
     case 'firstName':
-      if (!formData.firstName) {
+      if (!formData.firstName)
         errors.firstName = 'Vorname ist erforderlich'
-      } else if (formData.firstName.length < 2) {
-        errors.firstName = 'Bitte geben Sie Ihren Vornamen ein (mind. 2 Zeichen)'
-      } else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.firstName)) {
+      else if (formData.firstName.length < 2)
+        errors.firstName = 'Vorname muss mindestens 2 Zeichen lang sein'
+      else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.firstName))
         errors.firstName = 'Vorname darf nur Buchstaben, Leerzeichen und Bindestriche enthalten'
-      }
       break
 
     case 'lastName':
-      if (!formData.lastName) {
+      if (!formData.lastName)
         errors.lastName = 'Nachname ist erforderlich'
-      } else if (formData.lastName.length < 2) {
-        errors.lastName = 'Bitte geben Sie Ihren Nachnamen ein (mind. 2 Zeichen)'
-      } else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.lastName)) {
+      else if (formData.lastName.length < 2)
+        errors.lastName = 'Nachname muss mindestens 2 Zeichen lang sein'
+      else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.lastName))
         errors.lastName = 'Nachname darf nur Buchstaben, Leerzeichen und Bindestriche enthalten'
-      }
       break
 
-    case 'phone':
-      if (!formData.phone) {
+    case 'phone': {
+      const digits = (formData.phone || '').replace(/\D/g, '')
+      if (!formData.phone)
         errors.phone = 'Telefonnummer ist erforderlich'
-      } else {
-        const digits = formData.phone.replace(/\D/g, '')
-        if (digits.length < 8) {
-          errors.phone = 'Telefonnummer muss mindestens 8 Ziffern haben'
-        } else if (digits.length > 15) {
-          errors.phone = 'Telefonnummer zu lang (max. 15 Ziffern)'
-        }
-      }
+      else if (digits.length < 8)
+        errors.phone = 'Telefonnummer muss mindestens 8 Ziffern haben'
+      else if (digits.length > 15)
+        errors.phone = 'Telefonnummer zu lang (max. 15 Ziffern)'
       break
+    }
 
     case 'email':
-      if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
         errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein'
-      }
       break
 
     case 'street':
-      if (!formData.street) {
+      if (!formData.street)
         errors.street = 'Straße und Hausnummer sind erforderlich'
-      } else if (formData.street.length < 5) {
+      else if (formData.street.length < 5)
         errors.street = 'Mindestens 5 Zeichen erforderlich'
-      } else if (!/^.+\s+\d+.*$/.test(formData.street)) {
+      else if (!/^.+\s+\d+.*$/.test(formData.street))
         errors.street = 'Bitte Straße und Hausnummer angeben (z.B. Hauptstraße 123)'
-      }
       break
 
     case 'plz':
-      if (!formData.plz) {
+      if (!formData.plz)
         errors.plz = 'Postleitzahl ist erforderlich'
-      } else if (!/^\d{5}$/.test(formData.plz)) {
+      else if (!/^\d{5}$/.test(formData.plz))
         errors.plz = 'Postleitzahl muss genau 5 Ziffern haben'
-      } else if (!formData.plz.startsWith('69')) {
-        errors.plz = 'Abholung nur im Gebiet 69xxx möglich'
-      } else {
-        // Prüfe ob Abholadresse in der Nähe der Geschäftsstelle liegt
-        const proximityResult = ValidationService.validatePickupProximity(formData.plz, '69488')
-        if (!proximityResult.isValid) {
-          errors.plz = proximityResult.error
-        } else {
-          errors.plz = null
-        }
+      else {
+        // Anforderung h: Die ersten beiden Stellen der Abholadresse müssen mit der
+        // Geschäftsstellen-PLZ (69488) übereinstimmen → ValidationService prüft das.
+        const result = ValidationService.validatePickupProximity(formData.plz, CONFIG.BUSINESS_LOCATION.plz)
+        if (!result.isValid) errors.plz = result.error
       }
       break
 
     case 'city':
-      if (!formData.city) {
+      if (!formData.city)
         errors.city = 'Ortsname ist erforderlich'
-      } else if (formData.city.length < 2) {
+      else if (formData.city.length < 2)
         errors.city = 'Ortsname zu kurz'
-      } else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.city)) {
+      else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.city))
         errors.city = 'Nur Buchstaben, Leerzeichen und Bindestriche erlaubt'
-      }
       break
 
     case 'clothing':
-      if (formData.clothing.length === 0) {
+      if (formData.clothing.length === 0)
         errors.clothing = 'Bitte wählen Sie mindestens eine Kleidungsart aus'
-      }
       break
 
     case 'quantity':
-      if (!formData.quantity) {
+      if (!formData.quantity)
         errors.quantity = 'Bitte wählen Sie eine Mengenangabe aus'
-      }
       break
 
     case 'crisisArea':
-      if (!formData.crisisArea) {
+      if (!formData.crisisArea)
         errors.crisisArea = 'Bitte wählen Sie ein Zielgebiet aus'
-      }
       break
 
     case 'pickupDate':
       if (!formData.pickupDate) {
         errors.pickupDate = 'Bitte wählen Sie ein Datum aus'
       } else {
-        const selectedDate = new Date(formData.pickupDate)
+        const selected = new Date(formData.pickupDate)
         const tomorrow = new Date()
         tomorrow.setDate(tomorrow.getDate() + 1)
         tomorrow.setHours(0, 0, 0, 0)
-        if (selectedDate < tomorrow) {
+        if (selected < tomorrow)
           errors.pickupDate = 'Abholtermin muss mindestens morgen sein'
-        }
       }
+      break
+
+    case 'terms':
+      if (!formData.terms)
+        errors.terms = 'Sie müssen den Datenschutzbestimmungen zustimmen'
       break
   }
 }
 
+// ── Submit-Validierung ruft validateField für jedes Pflichtfeld auf ─────────
+// Dadurch ist die Logik nur EINMAL definiert (in validateField), kein Code-Duplikat.
 const validate = () => {
   Object.keys(errors).forEach(key => delete errors[key])
 
-  // Vorname validieren
-  if (!formData.firstName) {
-    errors.firstName = 'Vorname ist erforderlich'
-  } else if (formData.firstName.length < 2) {
-    errors.firstName = 'Bitte geben Sie Ihren Vornamen ein (mind. 2 Zeichen)'
-  } else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.firstName)) {
-    errors.firstName = 'Vorname darf nur Buchstaben, Leerzeichen und Bindestriche enthalten'
-  }
-
-  // Nachname validieren
-  if (!formData.lastName) {
-    errors.lastName = 'Nachname ist erforderlich'
-  } else if (formData.lastName.length < 2) {
-    errors.lastName = 'Bitte geben Sie Ihren Nachnamen ein (mind. 2 Zeichen)'
-  } else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.lastName)) {
-    errors.lastName = 'Nachname darf nur Buchstaben, Leerzeichen und Bindestriche enthalten'
-  }
-
-  // Telefon validieren
-  if (!formData.phone) {
-    errors.phone = 'Telefonnummer ist erforderlich'
-  } else {
-    const digits = formData.phone.replace(/\D/g, '')
-    if (digits.length < 8) {
-      errors.phone = 'Telefonnummer muss mindestens 8 Ziffern haben'
-    } else if (digits.length > 15) {
-      errors.phone = 'Telefonnummer zu lang (max. 15 Ziffern)'
-    }
-  }
-
-  // E-Mail validieren (optional)
-  if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-    errors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein'
-  }
-
-  // Straße validieren
-  if (!formData.street) {
-    errors.street = 'Straße und Hausnummer sind erforderlich'
-  } else if (formData.street.length < 5) {
-    errors.street = 'Mindestens 5 Zeichen erforderlich'
-  } else if (!/^.+\s+\d+.*$/.test(formData.street)) {
-    errors.street = 'Bitte Straße und Hausnummer angeben (z.B. Hauptstraße 123)'
-  }
-
-  // PLZ validieren - nur 69xxx für Abholung!
-  if (!formData.plz) {
-    errors.plz = 'Postleitzahl ist erforderlich'
-  } else if (!/^\d{5}$/.test(formData.plz)) {
-    errors.plz = 'Postleitzahl muss genau 5 Ziffern haben'
-  } else if (!formData.plz.startsWith('69')) {
-    errors.plz = 'Abholung nur im Gebiet 69xxx möglich'
-  } else {
-    // Prüfe ob Abholadresse in der Nähe der Geschäftsstelle liegt
-    const proximityResult = ValidationService.validatePickupProximity(formData.plz, '69488')
-    if (!proximityResult.isValid) {
-      errors.plz = proximityResult.error
-    }
-  }
-
-  // Ort validieren
-  if (!formData.city) {
-    errors.city = 'Ortsname ist erforderlich'
-  } else if (formData.city.length < 2) {
-    errors.city = 'Ortsname zu kurz'
-  } else if (!/^[a-zA-ZäöüÄÖÜß\s\-]+$/.test(formData.city)) {
-    errors.city = 'Nur Buchstaben, Leerzeichen und Bindestriche erlaubt'
-  }
-
-  // Kleidungsauswahl
-  if (formData.clothing.length === 0) {
-    errors.clothing = 'Bitte wählen Sie mindestens eine Kleidungsart aus'
-  }
-
-  // Mengenauswahl
-  if (!formData.quantity) {
-    errors.quantity = 'Bitte wählen Sie eine Mengenangabe aus'
-  }
-
-  // Zielgebiet
-  if (!formData.crisisArea) {
-    errors.crisisArea = 'Bitte wählen Sie ein Zielgebiet aus'
-  }
-
-  // Datum validieren - nicht in der Vergangenheit!
-  if (!formData.pickupDate) {
-    errors.pickupDate = 'Bitte wählen Sie ein Datum aus'
-  } else {
-    const selectedDate = new Date(formData.pickupDate)
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    tomorrow.setHours(0, 0, 0, 0)
-    if (selectedDate < tomorrow) {
-      errors.pickupDate = 'Abholtermin muss mindestens morgen sein'
-    }
-  }
-
-  // Datenschutz
-  if (!formData.terms) {
-    errors.terms = 'Sie müssen den Datenschutzbestimmungen zustimmen'
-  }
+  const fields = [
+    'firstName', 'lastName', 'phone', 'email',
+    'street', 'plz', 'city',
+    'clothing', 'quantity', 'crisisArea',
+    'pickupDate', 'terms'
+  ]
+  fields.forEach(field => validateField(field))
 
   return Object.keys(errors).length === 0
 }
 
 const scrollToFirstError = () => {
-  const firstErrorKey = Object.keys(errors).find(key => errors[key])
-  if (firstErrorKey) {
-    // Find the input element by matching label or name attribute
-    const errorElement = document.querySelector(`[name="${firstErrorKey}"], #${firstErrorKey}, [data-error="${firstErrorKey}"]`)
-    if (errorElement) {
-      errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      // Try to focus the element after scrolling
-      setTimeout(() => {
-        if (errorElement.focus) {
-          errorElement.focus()
-        } else {
-          // If it's not focusable, try to find an input inside
-          const input = errorElement.querySelector('input, select, textarea')
-          if (input) input.focus()
-        }
-      }, 300)
-    }
+  const firstKey = Object.keys(errors)[0]
+  if (!firstKey) return
+  const el = document.querySelector(`[id="${firstKey}"], [aria-describedby*="${firstKey}"]`)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setTimeout(() => el.focus?.(), 300)
   }
 }
 
+const toggleClothingType = (value) => {
+  const idx = formData.clothing.indexOf(value)
+  if (idx > -1) formData.clothing.splice(idx, 1)
+  else          formData.clothing.push(value)
+  validateField('clothing')
+}
+
 const handleSubmit = async () => {
-  console.log('Form submitted!', formData)
-  
   if (!validate()) {
-    console.log('Validation failed:', errors)
     scrollToFirstError()
     return
   }
 
-  console.log('Validation passed!')
   isSubmitting.value = true
-
   try {
     const referenceNumber = `KSB-${new Date().getFullYear()}-${Math.floor(Math.random() * 9000) + 1000}`
-    
+
     await donationStore.saveDonation({
       ...formData,
       type: 'pickup',
@@ -731,11 +605,10 @@ const handleSubmit = async () => {
       submittedAt: new Date().toISOString()
     })
 
-    console.log('Navigating to confirmation with ref:', referenceNumber)
     router.push(`/confirmation?ref=${referenceNumber}`)
-  } catch (error) {
-    console.error('Submission error:', error)
-    alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.')
+  } catch {
+    // Nutzt den UIStore statt alert() — zeigt eine barrierefreie Fehlermeldung
+    uiStore.showError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.')
   } finally {
     isSubmitting.value = false
   }
