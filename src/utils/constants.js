@@ -114,7 +114,7 @@ export const CONFIG = {
     EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     PHONE: /^[\d\s\-\+\(\)]+$/,
     ZIP_CODE: /^\d{4,10}$/,
-    REFERENCE_NUMBER: /^KS\d{10}$/
+    REFERENCE_NUMBER: /^KSB-\d{4}-\d{4}$/
   },
 
   // Shared form options — single source of truth for both Pickup and Dropoff forms

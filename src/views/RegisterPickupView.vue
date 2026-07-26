@@ -144,7 +144,7 @@
             </div>
 
             <!-- Kleidungsauswahl — aria-pressed kommuniziert Zustand an Screenreader -->
-            <fieldset class="form-group mb-6">
+            <fieldset id="clothing" class="form-group mb-6">
               <legend class="block text-sm font-semibold text-gray-700 mb-3">
                 Art der Kleidung <span class="text-red-500" aria-hidden="true">*</span>
               </legend>
@@ -171,7 +171,7 @@
             </fieldset>
 
             <!-- Mengenauswahl -->
-            <fieldset class="form-group">
+            <fieldset id="quantity" class="form-group">
               <legend class="block text-sm font-semibold text-gray-700 mb-3">
                 Geschätzte Menge <span class="text-red-500" aria-hidden="true">*</span>
               </legend>
@@ -211,7 +211,7 @@
               </div>
             </div>
 
-            <fieldset>
+            <fieldset id="crisisArea">
               <legend class="sr-only">Krisengebiet auswählen</legend>
               <div class="grid md:grid-cols-2 gap-3">
                 <button
@@ -249,7 +249,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="w-full">
+              <div id="pickupDate" class="w-full">
                 <label class="form-label block text-sm font-semibold text-gray-700 mb-3">
                   Wunschtermin <span class="text-red-500" aria-hidden="true">*</span>
                 </label>
@@ -444,6 +444,12 @@ const yearOptions = computed(() => {
 const updatePickupDate = () => {
   if (formData.pickupDateDay && formData.pickupDateMonth && formData.pickupDateYear) {
     formData.pickupDate = `${formData.pickupDateYear}-${formData.pickupDateMonth}-${formData.pickupDateDay}`
+    
+    // Prüfe, ob die Datumskombination gültig ist (z.B. 31. Februar)
+    const testDate = new Date(formData.pickupDate)
+    if (isNaN(testDate.getTime()) || testDate.toISOString().substring(0, 10) !== formData.pickupDate) {
+      errors.pickupDate = 'Ungültiges Datum (z.B. 31. Februar existiert nicht)'
+    }
   } else {
     formData.pickupDate = ''
   }

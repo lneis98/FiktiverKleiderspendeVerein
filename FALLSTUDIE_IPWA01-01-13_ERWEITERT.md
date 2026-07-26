@@ -1,10 +1,12 @@
 # Kleiderspenden-Portal für den Verein Birkenau e. V.
 
+> ⚠️ **Status:** Code-Fehler behoben (26. Juli 2026) — Screenshots als nächster Schritt erforderlich.
+
 **Kurs:** IPWA01-01 – Programmierung von Webanwendungsoberflächen  
 **Autorin:** Leonie Neis  
 **Matrikelnummer:** IU14076896  
 **Datum:** 26. Januar 2026  
-**GitHub-Repository:** https://github.com/[DEIN-GITHUB-LINK-HIER-EINFÜGEN]
+**GitHub-Repository:** https://github.com/lneis98/FiktiverKleiderspendeVerein
 
 ---
 

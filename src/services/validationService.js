@@ -109,12 +109,13 @@ class ValidationService {
       return { isValid: false, error: 'Postleitzahl muss 5 Ziffern enthalten' };
     }
 
-    // Kritisch: Erste beiden Ziffern müssen 69 sein (Birkenau-Region)
+    // Kritisch: Erste beiden Ziffern müssen dem PLZ-Prefix der Geschäftsstelle entsprechen
     const prefix = value.substring(0, 2);
-    if (prefix !== '69') {
+    const expectedPrefix = CONFIG.BUSINESS_LOCATION.plzPrefix;
+    if (prefix !== expectedPrefix) {
       return { 
         isValid: false, 
-        error: 'Postleitzahl muss mit 69 beginnen (Sie liegen in der Birkenau-Region)' 
+        error: `Postleitzahl muss mit ${expectedPrefix} beginnen (Sie liegen in der ${CONFIG.BUSINESS_LOCATION.name}-Region)` 
       };
     }
     
@@ -185,7 +186,7 @@ class ValidationService {
     if (!CONFIG.PATTERNS.REFERENCE_NUMBER.test(value)) {
       return { 
         isValid: false, 
-        error: 'Ungültige Referenznummer (Format: KS + 10 Ziffern)' 
+        error: 'Ungültige Referenznummer (Format: KSB-YYYY-XXXX)' 
       };
     }
     
