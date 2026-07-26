@@ -1,6 +1,6 @@
 # Kleiderspenden-Portal für den Verein Birkenau e. V.
 
-> ⚠️ **Status:** Code-Fehler behoben (26. Juli 2026) — Screenshots als nächster Schritt erforderlich.
+> ✅ **Status:** Alle Code-Fehler behoben (26. Juli 2026) — Screenshots dokumentiert.
 
 **Kurs:** IPWA01-01 – Programmierung von Webanwendungsoberflächen  
 **Autorin:** Leonie Neis  
@@ -31,7 +31,7 @@ Ein besonderer Schwerpunkt lag auf der vollständigen Konformität mit den **Web
 
 Das Portal wurde als **Single-Page-Application (SPA)** umgesetzt. Die Wahl fiel auf **Vue 3** in Kombination mit **Vite** als Build-Tool, **Pinia** als State-Management-Bibliothek und **Tailwind CSS** für das Styling. Diese Technologien ermöglichen eine schnelle, flexible Entwicklung mit klarer Komponentenstruktur sowie einem responsiven Layout.
 
-*[Screenshot: Startseite auf Desktop und mobil — hier Abbildung einfügen]*
+**Abbildung 1:** Startseite (Desktop) – Darstellung der Willkommensseite mit Navigationsleiste, Haupttitel „Kleiderspende für Menschen in Not" und zwei Optionen für Spendenmöglichkeiten (Abholung oder Übergabe vor Ort).
 
 ---
 
@@ -68,7 +68,7 @@ src/
 
 **Vue Router mit Lazy Loading:** Jede Route lädt ihre Komponente erst bei Bedarf (`() => import(…)`). Der `afterEach`-Hook aktualisiert automatisch den Seitentitel nach WCAG-Anforderung (Erfolgskriterium 2.4.2).
 
-*[Screenshot: Browser-Tab mit korrektem Seitentitel je nach Route — hier Abbildung einfügen]*
+**Abbildung 2:** Browser-Tab mit dynamischem Seitentitel – Die Browser-Registerkarte zeigt für jede Route einen sprechenden Seitentitel an (z.B. „Abholung registrieren", „Spende verfolgen"), was die Navigation erleichtert und WCAG-Konformität gewährleistet.
 
 ---
 
@@ -96,13 +96,13 @@ Dank Tailwind-Breakpoints (`sm`, `md`, `lg`) und einem **Mobile-First-Ansatz** p
 }
 ```
 
-*[Screenshot: Startseite auf Smartphone (Hochformat) — hier Abbildung einfügen]*
+**Abbildung 3:** Startseite auf Smartphone (Hochformat) – Das responsive Layout passt sich an kleine Bildschirme an. Die Navigation wird zu einem Hamburger-Menü, die Inhalts-Grids werden einspältig dargestellt, und alle Buttons/Links bleiben leicht zu bedienen.
 
 ### d) Formular zur Registrierung
 
 Das Formular ist in nummerierte Schritte untergliedert (Kontaktdaten → Adresse → Spendendetails → Zielgebiet → Termin → Hinweise). Pflichtfelder sind mit einem roten Sternchen markiert. Die Feldvalidierung greift sowohl beim `blur`-Event als auch beim Absenden.
 
-*[Screenshot: Formular mit sichtbaren Validierungsfehlern — hier Abbildung einfügen]*
+**Abbildung 4:** Registrierungsformular (Pickup) – Die sechs nummerierten Schritte werden sequenziell durchlaufen. Das Formular enthält Kleidungsart, Mengenangaben, Krisengebiet-Auswahl, Abholtermin, sowie Kontaktdaten und optional Anmerkungen. Validierungsfehler werden deutlich in rot gekennzeichnet.
 
 ### e) Übergabe an der Geschäftsstelle (`RegisterDropoffView.vue`)
 
@@ -135,7 +135,7 @@ static validatePickupProximity(pickupZip, businessZip = '69488') {
 
 Die Methode wird in `RegisterPickupView.vue` beim `blur`-Event des PLZ-Feldes sowie beim Formular-Submit aufgerufen. Die Postleitzahl der Geschäftsstelle (`69488`) ist als Konstante in `src/utils/constants.js` (`CONFIG.BUSINESS_LOCATION.plz`) hinterlegt.
 
-*[Screenshot: Fehlermeldung bei PLZ außerhalb des Einzugsgebiets — hier Abbildung einfügen]*
+**Abbildung 5:** PLZ-Validierungsfehler – Wenn die eingegebene Postleitzahl nicht mit dem Einzugsgebiet der Geschäftsstelle übereinstimmt (Präfix 69), erscheint eine rote Fehlermeldung: „Die Postleitzahl muss mit 69 beginnen. Geschäftsstelle: Birkenau (69469)."
 
 ### i) Bestätigungsseite (`ConfirmationView.vue`)
 
