@@ -142,7 +142,7 @@ class ValidationService {
     if (pickupPrefix !== businessPrefix) {
       return {
         isValid: false,
-        error: `Leider liegt Ihre Adresse außerhalb unseres Abholgebiets. Wir holen nur in der Region ${businessZip} ab.`
+        error: `Leider liegt Ihre Adresse außerhalb unseres Abholgebiets. Wir holen nur im Bereich ${businessPrefix}xxx ab.`
       };
     }
 
