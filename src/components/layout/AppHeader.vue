@@ -1,30 +1,30 @@
 <template>
   <header class="header sticky top-0 z-50 border-b border-white/20">
     <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between min-h-[100px] py-4">
+      <div class="flex items-center justify-between min-h-[80px] sm:min-h-[100px] py-4">
         <!-- Logo -->
-        <router-link to="/" class="logo-link flex items-center gap-4 hover:scale-[1.02] transition-transform duration-300 focus-ring rounded-lg p-2">
+        <router-link to="/" class="logo-link flex items-center gap-2 sm:gap-3 md:gap-3 lg:gap-4 hover:scale-[1.02] transition-transform duration-300 focus-ring rounded-lg p-2">
           <img 
             src="/assets/logo.png" 
             alt="Kleiderspendenverein Birkenau" 
-            class="logo-image w-[64px] h-[64px] sm:w-[72px] sm:h-[72px] md:w-[90px] md:h-[90px] rounded-lg object-cover shadow-sm hidden sm:block"
+            class="logo-image w-[56px] h-[56px] sm:w-[64px] sm:h-[64px] md:w-[72px] md:h-[72px] lg:w-[90px] lg:h-[90px] rounded-lg object-cover shadow-sm hidden sm:block"
             loading="lazy"
             decoding="async"
           />
           <div class="logo-text flex flex-col gap-1">
-            <span class="logo-title text-3xl font-extrabold text-gray-900 leading-tight">
+            <span class="logo-title text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
               Kleider<span class="text-purple-600">Spende</span>
             </span>
-            <p class="logo-subtitle text-base font-semibold text-gray-600 m-0 leading-none md:hidden">Kleiderverein Birkenau</p>
-            <p class="logo-subtitle text-base font-semibold text-gray-600 m-0 leading-none hidden md:block">Birkenau</p>
+            <p class="logo-subtitle text-sm sm:text-base font-semibold text-gray-600 m-0 leading-none md:hidden">Kleiderverein Birkenau</p>
+            <p class="logo-subtitle text-xs sm:text-sm font-semibold text-gray-600 m-0 leading-none hidden md:block">Birkenau</p>
             <p class="logo-tagline text-xs text-gray-500 m-0 max-w-[200px] leading-tight hidden lg:block">
               Helfen Sie mit Ihrer Kleiderspende aktuellen Krisenländern weltweit
             </p>
           </div>
         </router-link>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-6" aria-label="Hauptnavigation">
+        <!-- Desktop Navigation (ab 1024px) -->
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Hauptnavigation">
           <router-link 
             to="/" 
             class="nav-link"
@@ -55,10 +55,10 @@
           </router-link>
         </nav>
 
-        <!-- Mobile Menu Button -->
+        <!-- Mobile/Tablet Menu Button (bis 1024px) -->
         <button
           @click="toggleMobileMenu"
-          class="md:hidden mobile-menu-toggle p-2 rounded-lg hover:bg-gray-100 focus-ring flex flex-col gap-1.5 w-10 h-10 justify-center items-center"
+          class="lg:hidden mobile-menu-toggle p-2 rounded-lg hover:bg-gray-100 focus-ring flex flex-col gap-1.5 w-10 h-10 justify-center items-center"
           type="button"
           aria-label="Menü öffnen"
           :aria-expanded="mobileMenuOpen"
@@ -70,12 +70,12 @@
         </button>
       </div>
 
-      <!-- Mobile Navigation -->
+      <!-- Mobile Navigation (bis 1024px) -->
       <Transition name="slide-down">
         <nav 
           v-if="mobileMenuOpen" 
           id="mobile-menu"
-          class="md:hidden py-4 border-t border-purple-100"
+          class="lg:hidden py-4 border-t border-purple-100"
           aria-label="Mobile Navigation"
         >
           <div class="flex flex-col space-y-2">

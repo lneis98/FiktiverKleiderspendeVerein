@@ -282,7 +282,7 @@ const router = useRouter()
 .hero-title {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  color: #1f2937;
+  color: #111827;
   margin-bottom: 1.5rem;
   line-height: 1.2;
   letter-spacing: -0.5px;
@@ -290,7 +290,7 @@ const router = useRouter()
 
 .hero-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #4b5563;
+  color: #374151;
   margin-bottom: 1rem;
   line-height: 1.6;
   font-weight: 400;
@@ -298,7 +298,7 @@ const router = useRouter()
 
 .hero-emphasis {
   font-size: 1rem;
-  color: #8b5cf6;
+  color: #6b21a8;
   font-weight: 600;
   margin-bottom: 2rem;
   letter-spacing: 0.5px;

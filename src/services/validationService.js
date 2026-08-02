@@ -115,7 +115,7 @@ class ValidationService {
     if (prefix !== expectedPrefix) {
       return { 
         isValid: false, 
-        error: `Postleitzahl muss mit ${expectedPrefix} beginnen (Sie liegen in der ${CONFIG.BUSINESS_LOCATION.name}-Region)` 
+        error: `Leider liegt Ihre Adresse außerhalb unseres Abholgebiets. Wir holen nur in der Region ${CONFIG.BUSINESS_LOCATION.plz} ab.` 
       };
     }
     
@@ -142,10 +142,7 @@ class ValidationService {
     if (pickupPrefix !== businessPrefix) {
       return {
         isValid: false,
-        error: `Bei der Abholadresse ist zu prüfen, ob sie in der Nähe der Geschäftsstelle liegt. 
-                Die ersten beiden Postleitzahlen müssen identisch sein. 
-                Geschäftsstelle: ${businessZip} (${businessPrefix}xxx), 
-                Ihre Adresse: ${pickupZip} (${pickupPrefix}xxx)`
+        error: `Leider liegt Ihre Adresse außerhalb unseres Abholgebiets. Wir holen nur in der Region ${businessZip} ab.`
       };
     }
 
