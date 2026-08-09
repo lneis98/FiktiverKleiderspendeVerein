@@ -411,10 +411,11 @@ const crisisCountries = [
 }
 
 .crisis-flag {
-  width: 40px;
-  height: 27px;
+  width: 60px;
+  height: 40px;
   object-fit: cover;
-  border-radius: 3px;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .crisis-title {
@@ -568,6 +569,11 @@ const crisisCountries = [
 
   .crisis-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .crisis-flag {
+    width: 50px;
+    height: 33px;
   }
 
   .stats-grid {
