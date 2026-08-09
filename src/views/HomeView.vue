@@ -79,87 +79,16 @@
           </p>
         </header>
         <div class="crisis-grid">
-          <article class="crisis-card">
+          <article v-for="country in crisisCountries" :key="country.code" class="crisis-card">
             <header class="crisis-header">
-              <span class="crisis-flag" aria-hidden="true">🇺🇦</span>
-              <h3 class="crisis-title">Ukraine</h3>
+              <img :src="country.flag" :alt="country.name + ' Flagge'" class="crisis-flag" />
+              <h3 class="crisis-title">{{ country.name }}</h3>
             </header>
             <p class="crisis-description">
-              Millionen Menschen benötigen warme Winterkleidung, Schuhe und Unterwäsche.
-              Besonders in den Frontgebieten besteht großer Bedarf.
+              {{ country.description }}
             </p>
             <div class="crisis-stats">
-              <span class="stat">1.580 Spenden gesammelt</span>
-            </div>
-          </article>
-
-          <article class="crisis-card">
-            <header class="crisis-header">
-              <span class="crisis-flag" aria-hidden="true">🇸🇾</span>
-              <h3 class="crisis-title">Syrien</h3>
-            </header>
-            <p class="crisis-description">
-              Besonders Kinderkleidung und Babysachen werden dringend benötigt.
-              Nach dem Erdbeben ist die humanitäre Lage weiterhin kritisch.
-            </p>
-            <div class="crisis-stats">
-              <span class="stat">1.200 Spenden gesammelt</span>
-            </div>
-          </article>
-
-          <article class="crisis-card">
-            <header class="crisis-header">
-              <span class="crisis-flag" aria-hidden="true">🇾🇪</span>
-              <h3 class="crisis-title">Jemen</h3>
-            </header>
-            <p class="crisis-description">
-              Eine der größten humanitären Krisen weltweit.
-              Grundlegende Kleidung für Familien wird dringend benötigt.
-            </p>
-            <div class="crisis-stats">
-              <span class="stat">730 Spenden gesammelt</span>
-            </div>
-          </article>
-
-          <article class="crisis-card">
-            <header class="crisis-header">
-              <span class="crisis-flag" aria-hidden="true">🇦🇫</span>
-              <h3 class="crisis-title">Afghanistan</h3>
-            </header>
-            <p class="crisis-description">
-              Großer Bedarf an warmer Kleidung für Familien in abgelegenen Regionen.
-              Besonders Frauen und Kinder benötigen Schutz vor der Kälte.
-            </p>
-            <div class="crisis-stats">
-              <span class="stat">980 Spenden gesammelt</span>
-            </div>
-          </article>
-
-          <article class="crisis-card">
-            <header class="crisis-header">
-              <span class="crisis-flag" aria-hidden="true">🇸🇴</span>
-              <h3 class="crisis-title">Somalia</h3>
-            </header>
-            <p class="crisis-description">
-              Nach Jahren der Dürre benötigen Familien grundlegende Kleidung und Schuhe.
-              Kinder sind besonders auf schützende Kleidung angewiesen.
-            </p>
-            <div class="crisis-stats">
-              <span class="stat">450 Spenden gesammelt</span>
-            </div>
-          </article>
-
-          <article class="crisis-card">
-            <header class="crisis-header">
-              <span class="crisis-flag" aria-hidden="true">🇭🇹</span>
-              <h3 class="crisis-title">Haiti</h3>
-            </header>
-            <p class="crisis-description">
-              Nach Naturkatastrophen brauchen Menschen Kleidung für einen Neuanfang.
-              Viele Familien haben nur das Nötigste.
-            </p>
-            <div class="crisis-stats">
-              <span class="stat">320 Spenden gesammelt</span>
+              <span class="stat">{{ country.donated }} Spenden gesammelt</span>
             </div>
           </article>
         </div>
@@ -250,6 +179,52 @@ import { useRouter } from 'vue-router'
 import BaseButton from '@/components/ui/BaseButton.vue'
 
 const router = useRouter()
+
+// Unterstützte Krisengebiete
+const crisisCountries = [
+  {
+    code: 'ua',
+    name: 'Ukraine',
+    flag: '/assets/flag-ua.svg',
+    description: 'Millionen Menschen benötigen warme Winterkleidung, Schuhe und Unterwäsche. Besonders in den Frontgebieten besteht großer Bedarf.',
+    donated: 1580
+  },
+  {
+    code: 'sy',
+    name: 'Syrien',
+    flag: '/assets/flag-sy.svg',
+    description: 'Besonders Kinderkleidung und Babysachen werden dringend benötigt. Nach dem Erdbeben ist die humanitäre Lage weiterhin kritisch.',
+    donated: 1200
+  },
+  {
+    code: 'ye',
+    name: 'Jemen',
+    flag: '/assets/flag-ye.svg',
+    description: 'Eine der größten humanitären Krisen weltweit. Grundlegende Kleidung für Familien wird dringend benötigt.',
+    donated: 730
+  },
+  {
+    code: 'af',
+    name: 'Afghanistan',
+    flag: '/assets/flag-af.svg',
+    description: 'Großer Bedarf an warmer Kleidung für Familien in abgelegenen Regionen. Besonders Frauen und Kinder benötigen Schutz vor der Kälte.',
+    donated: 980
+  },
+  {
+    code: 'so',
+    name: 'Somalia',
+    flag: '/assets/flag-so.svg',
+    description: 'Nach Jahren der Dürre benötigen Familien grundlegende Kleidung und Schuhe. Kinder sind besonders auf schützende Kleidung angewiesen.',
+    donated: 450
+  },
+  {
+    code: 'ht',
+    name: 'Haiti',
+    flag: '/assets/flag-ht.svg',
+    description: 'Nach Naturkatastrophen brauchen Menschen Kleidung für einen Neuanfang. Viele Familien haben nur das Nötigste.',
+    donated: 320
+  }
+]
 </script>
 
 <style scoped>
@@ -345,7 +320,7 @@ const router = useRouter()
 
 .section-description {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #6b7280;
+  color: #4b5563;
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
@@ -400,7 +375,7 @@ const router = useRouter()
 
 .option-description {
   font-size: 0.95rem;
-  color: #6b7280;
+  color: #4b5563;
   line-height: 1.6;
 }
 
@@ -436,8 +411,10 @@ const router = useRouter()
 }
 
 .crisis-flag {
-  font-size: 2rem;
-  line-height: 1;
+  width: 40px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 3px;
 }
 
 .crisis-title {
@@ -458,6 +435,7 @@ const router = useRouter()
   font-size: 0.875rem;
   color: #8b5cf6;
   font-weight: 600;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 -1px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* Stats Section */

@@ -1,8 +1,12 @@
 <template>
   <div id="app" class="min-h-screen flex flex-col app-wrapper">
+    <!-- Skip Link für Keyboard-Navigation -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-[100] focus:bg-purple-600 focus:text-white focus:px-4 focus:py-2">
+      Zum Hauptinhalt springen
+    </a>
     <AppHeader />
     
-    <main class="flex-grow relative z-10">
+    <main id="main-content" class="flex-grow relative z-10">
       <RouterView v-slot="{ Component, route }">
         <Transition :name="route.meta.transition || 'fade'" mode="out-in">
           <component :is="Component" :key="route.path" />

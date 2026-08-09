@@ -10,7 +10,7 @@
     --color-primary-300: #93c5fd;
     --color-primary-400: #60a5fa;
     --color-primary-500: #3b82f6;
-    --color-primary-600: #2563eb;
+    --color-primary-600: #1e40af;
     --color-primary-700: #1d4ed8;
     --color-primary-800: #1e40af;
     --color-primary-900: #1e3a8a;
@@ -97,6 +97,12 @@
 
   .hint-message {
     @apply mt-1 text-sm text-gray-500;
+  }
+
+  /* Emoji Font Stack for Flags and Emojis */
+  .crisis-flag {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", system-ui, sans-serif;
+    font-size: 1.5em;
   }
 
   /* Skip Link for Accessibility */

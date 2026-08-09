@@ -48,6 +48,7 @@ const currentYear = computed(() => new Date().getFullYear());
 
 <style scoped>
 .footer-link {
-  @apply text-gray-300 hover:text-purple-300 transition-colors text-sm focus-ring;
+  @apply text-gray-300 hover:text-purple-300 transition-colors text-sm;
+  @apply focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:rounded;
 }
 </style>

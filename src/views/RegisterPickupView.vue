@@ -449,11 +449,14 @@ const updatePickupDate = () => {
     const testDate = new Date(formData.pickupDate)
     if (isNaN(testDate.getTime()) || testDate.toISOString().substring(0, 10) !== formData.pickupDate) {
       errors.pickupDate = 'Ungültiges Datum (z.B. 31. Februar existiert nicht)'
+    } else {
+      // Lösche Fehler, wenn Datum gültig ist
+      delete errors.pickupDate
     }
   } else {
     formData.pickupDate = ''
+    // Fehler nur beim Submit zeigen, nicht während der Eingabe
   }
-  validateField('pickupDate')
 }
 
 // ── Einzelfeld-Validierung (wird bei blur UND beim Submit-Sammeldurchlauf genutzt) ──

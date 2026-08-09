@@ -92,9 +92,9 @@
                   <dt class="text-gray-600 font-medium">Uhrzeit:</dt>
                   <dd class="text-gray-900 font-semibold">{{ submittedTime }}</dd>
                 </div>
-                <div class="detail-row">
-                  <dt class="text-gray-600 font-medium mb-1">Ort:</dt>
-                  <dd class="text-gray-900 font-semibold">
+                <div class="detail-row flex justify-between">
+                  <dt class="text-gray-600 font-medium">Ort:</dt>
+                  <dd class="text-gray-900 font-semibold text-right">
                     {{ businessLocation.name }}<br>
                     <span class="text-sm font-normal text-gray-600">{{ businessLocation.address }}</span>
                   </dd>

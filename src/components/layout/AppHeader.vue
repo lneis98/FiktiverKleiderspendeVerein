@@ -64,9 +64,9 @@
           :aria-expanded="mobileMenuOpen"
           :aria-controls="mobileMenuOpen ? 'mobile-menu' : undefined"
         >
-          <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{ 'rotate-45 translate-y-2': mobileMenuOpen }"></span>
-          <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{ 'opacity-0': mobileMenuOpen }"></span>
-          <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{ '-rotate-45 -translate-y-2': mobileMenuOpen }"></span>
+          <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{ 'rotate-45 translate-y-2': mobileMenuOpen }" aria-hidden="true"></span>
+          <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{ 'opacity-0': mobileMenuOpen }" aria-hidden="true"></span>
+          <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" :class="{ '-rotate-45 -translate-y-2': mobileMenuOpen }" aria-hidden="true"></span>
         </button>
       </div>
 
