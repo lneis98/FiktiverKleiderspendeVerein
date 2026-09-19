@@ -174,7 +174,7 @@ const uiStore = useUIStore()
 const isSubmitting = ref(false)
 
 // Shared form options aus constants.js — Single Source of Truth
-const clothingTypes = CONFIG.FORM_CLOTHING_TYPES
+const clothingTypes = CONFIG.CLOTHING_TYPES
 const crisisAreas   = CONFIG.CRISIS_AREAS
 
 // Vereinsadresse für die Hinweisbox (dynamisch aus CONFIG)

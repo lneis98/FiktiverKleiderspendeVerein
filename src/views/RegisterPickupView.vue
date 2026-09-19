@@ -407,8 +407,8 @@ const uiStore = useUIStore()
 const isSubmitting = ref(false)
 
 // ── Shared form options aus constants.js — Single Source of Truth ──────────
-const clothingTypes  = CONFIG.FORM_CLOTHING_TYPES
-const quantityOptions = CONFIG.FORM_QUANTITY_OPTIONS
+const clothingTypes  = CONFIG.CLOTHING_TYPES
+const quantityOptions = CONFIG.QUANTITY_OPTIONS
 const crisisAreas    = CONFIG.CRISIS_AREAS
 
 // ── Formular-State ─────────────────────────────────────────────────────────

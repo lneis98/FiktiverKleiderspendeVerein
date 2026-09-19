@@ -28,14 +28,16 @@ export const CONFIG = {
     TRACKING_DATA: 'trackingData'
   },
   
-  // Form Options
+  // Form Options — single source of truth for clothing types
   CLOTHING_TYPES: [
-    { id: 'oberbekleidung', label: 'Oberbekleidung', description: 'Jacken, Pullover, Shirts' },
-    { id: 'unterbekleidung', label: 'Unterbekleidung', description: 'Hosen, Röcke' },
-    { id: 'schuhe', label: 'Schuhe' },
-    { id: 'accessoires', label: 'Accessoires', description: 'Taschen, Gürtel, Schals' },
-    { id: 'kinderbekleidung', label: 'Kinderkleidung' },
-    { id: 'babybekleidung', label: 'Babyausstattung' }
+    { value: 'shirts',      icon: '👔', label: 'Hemden & T-Shirts' },
+    { value: 'pants',       icon: '👖', label: 'Hosen & Jeans'    },
+    { value: 'dresses',     icon: '👗', label: 'Kleider & Röcke'  },
+    { value: 'jackets',     icon: '🧥', label: 'Jacken & Mäntel'  },
+    { value: 'sweaters',    icon: '🧶', label: 'Pullover'          },
+    { value: 'children',    icon: '🍼', label: 'Kinderkleidung'    },
+    { value: 'shoes',       icon: '👟', label: 'Schuhe'            },
+    { value: 'accessories', icon: '🧣', label: 'Accessoires'       }
   ],
   
   SIZES: [
@@ -117,31 +119,68 @@ export const CONFIG = {
     REFERENCE_NUMBER: /^KSB-\d{4}-\d{4}$/
   },
 
-  // Shared form options — single source of truth for both Pickup and Dropoff forms
-  FORM_CLOTHING_TYPES: [
-    { value: 'shirts',      icon: '👔', label: 'Hemden & T-Shirts' },
-    { value: 'pants',       icon: '👖', label: 'Hosen & Jeans'    },
-    { value: 'dresses',     icon: '👗', label: 'Kleider & Röcke'  },
-    { value: 'jackets',     icon: '🧥', label: 'Jacken & Mäntel'  },
-    { value: 'sweaters',    icon: '🧶', label: 'Pullover'          },
-    { value: 'children',    icon: '🍼', label: 'Kinderkleidung'    },
-    { value: 'shoes',       icon: '👟', label: 'Schuhe'            },
-    { value: 'accessories', icon: '🧣', label: 'Accessoires'       }
-  ],
-
-  FORM_QUANTITY_OPTIONS: [
+  QUANTITY_OPTIONS: [
     { value: 'small',  icon: '📦',       label: 'Klein (1–2 Taschen/Kartons)', desc: 'bis 20 kg'   },
     { value: 'medium', icon: '📦📦',     label: 'Mittel (3–5 Taschen/Kartons)', desc: '20–50 kg'  },
     { value: 'large',  icon: '📦📦📦',   label: 'Groß (6+ Taschen/Kartons)',   desc: 'über 50 kg' }
   ],
 
+  // Crisis areas — single source of truth for all crisis-related data
   CRISIS_AREAS: [
-    { value: 'ukraine',     flag: '🇺🇦', label: 'Ukraine'     },
-    { value: 'syria',       flag: '🇸🇾', label: 'Syrien'      },
-    { value: 'afghanistan', flag: '🇦🇫', label: 'Afghanistan' },
-    { value: 'yemen',       flag: '🇾🇪', label: 'Jemen'       },
-    { value: 'somalia',     flag: '🇸🇴', label: 'Somalia'     },
-    { value: 'haiti',       flag: '🇭🇹', label: 'Haiti'       }
+    {
+      value: 'ukraine',
+      code: 'ua',
+      label: 'Ukraine',
+      flag: '🇺🇦',
+      flagAsset: '/assets/flag-ua.svg',
+      description: 'Millionen Menschen benötigen warme Winterkleidung, Schuhe und Unterwäsche. Besonders in den Frontgebieten besteht großer Bedarf.',
+      donated: 1580
+    },
+    {
+      value: 'syria',
+      code: 'sy',
+      label: 'Syrien',
+      flag: '🇸🇾',
+      flagAsset: '/assets/flag-sy.svg',
+      description: 'Besonders Kinderkleidung und Babysachen werden dringend benötigt. Nach dem Erdbeben ist die humanitäre Lage weiterhin kritisch.',
+      donated: 1200
+    },
+    {
+      value: 'yemen',
+      code: 'ye',
+      label: 'Jemen',
+      flag: '🇾🇪',
+      flagAsset: '/assets/flag-ye.svg',
+      description: 'Eine der größten humanitären Krisen weltweit. Grundlegende Kleidung für Familien wird dringend benötigt.',
+      donated: 730
+    },
+    {
+      value: 'afghanistan',
+      code: 'af',
+      label: 'Afghanistan',
+      flag: '🇦🇫',
+      flagAsset: '/assets/flag-af.svg',
+      description: 'Großer Bedarf an warmer Kleidung für Familien in abgelegenen Regionen. Besonders Frauen und Kinder benötigen Schutz vor der Kälte.',
+      donated: 980
+    },
+    {
+      value: 'somalia',
+      code: 'so',
+      label: 'Somalia',
+      flag: '🇸🇴',
+      flagAsset: '/assets/flag-so.svg',
+      description: 'Nach Jahren der Dürre benötigen Familien grundlegende Kleidung und Schuhe. Kinder sind besonders auf schützende Kleidung angewiesen.',
+      donated: 450
+    },
+    {
+      value: 'haiti',
+      code: 'ht',
+      label: 'Haiti',
+      flag: '🇭🇹',
+      flagAsset: '/assets/flag-ht.svg',
+      description: 'Nach Naturkatastrophen brauchen Menschen Kleidung für einen Neuanfang. Viele Familien haben nur das Nötigste.',
+      donated: 320
+    }
   ]
 };
 

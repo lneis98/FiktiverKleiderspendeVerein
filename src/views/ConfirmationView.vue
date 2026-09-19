@@ -237,10 +237,10 @@ const confirmationTitle = computed(() =>
 
 // ── Spendendetails ──────────────────────────────────────────────────────────
 const clothingLabels = Object.fromEntries(
-  CONFIG.FORM_CLOTHING_TYPES.map(t => [t.value, t.label])
+  CONFIG.CLOTHING_TYPES.map(t => [t.value, t.label])
 )
 const quantityLabels = Object.fromEntries(
-  CONFIG.FORM_QUANTITY_OPTIONS.map(q => [q.value, q.label])
+  CONFIG.QUANTITY_OPTIONS.map(q => [q.value, q.label])
 )
 const crisisLabels = Object.fromEntries(
   CONFIG.CRISIS_AREAS.map(a => [a.value, `${a.flag} ${a.label}`])
