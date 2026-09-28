@@ -91,14 +91,6 @@ const router = createRouter({
         title: 'Datenschutz',
         transition: 'fade'
       }
-    },
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'not-found',
-      component: () => import('../views/NotFoundView.vue'),
-      meta: {
-        title: '404 - Seite nicht gefunden'
-      }
     }
   ]
 });
