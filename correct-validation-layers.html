@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-Layer Validation - Korrekter Code</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .layers {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .layer {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .layer:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Layer 1: HTML */
+    .layer-1 {
+      background: linear-gradient(135deg, #667eea 0%, #5a67d8 100%);
+    }
+
+    .layer-1 .layer-header {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .layer-1 .layer-number {
+      background: #4c51bf;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Layer 2: Service */
+    .layer-2 {
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    }
+
+    .layer-2 .layer-header {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .layer-2 .layer-number {
+      background: #2f855a;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Layer 3: Form */
+    .layer-3 {
+      background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+    }
+
+    .layer-3 .layer-header {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px 20px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .layer-3 .layer-number {
+      background: #c05621;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .layer-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .layer-title {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .layer-content {
+      padding: 25px;
+      color: white;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      background: rgba(0, 0, 0, 0.1);
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .code-line {
+      line-height: 1.6;
+      padding: 3px 0;
+    }
+
+    .keyword { color: #ffd700; font-weight: bold; }
+    .string { color: #90ee90; }
+    .attr { color: #87ceeb; }
+    .value { color: #ffb6c1; }
+    .comment { color: #a9a9a9; font-style: italic; }
+
+    .checkmark {
+      display: inline-block;
+      color: #90ee90;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .layer-content {
+        font-size: 0.85rem;
+      }
+
+      .layer-title {
+        font-size: 1rem;
+      }
+    }
+
+    .scroll-hint {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+      font-size: 0.95rem;
+    }
+
+    .footer strong {
+      color: #90ee90;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ PLZ-Validierung: Der korrekte Code</h1>
+
+    <div class="layers">
+      <!-- Layer 1: HTML (Browser-Level) -->
+      <div class="layer layer-1">
+        <div class="layer-header">
+          <div class="layer-number">1</div>
+          <div class="layer-title">HTML (Browser-Level)</div>
+        </div>
+        <div class="layer-content">
+          <div class="code-line"><span class="comment">// ✅ RegisterPickupView.vue - PLZ Input</span></div>
+          <div class="code-line"></div>
+          <div class="code-line"><span class="keyword">&lt;BaseInput</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">v-model</span>=<span class="value">"formData.plz"</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">label</span>=<span class="value">"Postleitzahl"</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">required</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">placeholder</span>=<span class="value">"69488"</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">maxlength</span>=<span class="value">"5"</span> <span class="checkmark">✓</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">pattern</span>=<span class="value">"[0-9]{5}"</span> <span class="checkmark">✓</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">inputmode</span>=<span class="value">"numeric"</span> <span class="checkmark">✓</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">autocomplete</span>=<span class="value">"postal-code"</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">:error</span>=<span class="value">"errors.plz"</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="attr">@blur</span>=<span class="value">"validateField('plz')"</span></div>
+          <div class="code-line"><span class="keyword">/&gt;</span></div>
+          <div class="scroll-hint">📌 Browser-Validierung: nur 5 Ziffern, Zahlenpad auf Mobile</div>
+        </div>
+      </div>
+
+      <!-- Layer 2: Service (Geschäftslogik) -->
+      <div class="layer layer-2">
+        <div class="layer-header">
+          <div class="layer-number">2</div>
+          <div class="layer-title">Service (validationService.js)</div>
+        </div>
+        <div class="layer-content">
+          <div class="code-line"><span class="comment">// ✅ validationService.js - PLZ Validierung</span></div>
+          <div class="code-line"></div>
+          <div class="code-line"><span class="keyword">static</span> <span class="keyword">validateZip</span>(value) {</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">if</span> (!value || value.trim().length === <span class="value">0</span>) {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> { <span class="attr">isValid</span>: <span class="value">false</span>, <span class="attr">error</span>: <span class="string">'Postleitzahl erforderlich'</span> }</div>
+          <div class="code-line">&nbsp;&nbsp;}</div>
+          <div class="code-line"></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">if</span> (!CONFIG.PATTERNS.ZIP_CODE.test(value)) {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> { <span class="attr">isValid</span>: <span class="value">false</span>, <span class="attr">error</span>: <span class="string">'Muss 5 Ziffern sein'</span> }</div>
+          <div class="code-line">&nbsp;&nbsp;}</div>
+          <div class="code-line"></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="comment">// Bereichsprüfung: Erste 2 Ziffern müssen 69 sein</span></div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">const</span> prefix = value.substring(<span class="value">0</span>, <span class="value">2</span>)</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">const</span> expected = CONFIG.BUSINESS_LOCATION.plzPrefix</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">if</span> (prefix !== expected) {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> { <span class="attr">isValid</span>: <span class="value">false</span>, <span class="attr">error</span>: <span class="string">'Außerhalb Abholgebiet'</span> }</div>
+          <div class="code-line">&nbsp;&nbsp;}</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">return</span> { <span class="attr">isValid</span>: <span class="value">true</span>, <span class="attr">error</span>: <span class="value">null</span> }</div>
+          <div class="code-line">}</div>
+          <div class="scroll-hint">✅ Tiefere Validierung: Format + Bereichsprüfung (69xxx)</div>
+        </div>
+      </div>
+
+      <!-- Layer 3: Form (Formular Submit) -->
+      <div class="layer layer-3">
+        <div class="layer-header">
+          <div class="layer-number">3</div>
+          <div class="layer-title">Form (formulár Submit)</div>
+        </div>
+        <div class="layer-content">
+          <div class="code-line"><span class="comment">// ✅ RegisterPickupView.vue - validateField()</span></div>
+          <div class="code-line"></div>
+          <div class="code-line"><span class="keyword">const</span> <span class="keyword">validateField</span> = (field) =&gt; {</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">switch</span> (field) {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span> <span class="string">'plz'</span>:</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">const</span> plzResult = ValidationService.validateZip(</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formData.plz</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errors.plz = plzResult.isValid ? <span class="string">''</span> : plzResult.error</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span></div>
+          <div class="code-line">&nbsp;&nbsp;}</div>
+          <div class="code-line">}</div>
+          <div class="code-line"></div>
+          <div class="code-line"><span class="keyword">const</span> <span class="keyword">validate</span> = () =&gt; {</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">const</span> allErrors = Object.keys(formData).map(field =&gt;</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;validateField(field)</div>
+          <div class="code-line">&nbsp;&nbsp;)</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="keyword">return</span> Object.keys(errors).length === <span class="value">0</span></div>
+          <div class="code-line">}</div>
+          <div class="scroll-hint">✅ Validierung beim Blur-Event + vor Submit</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>Zusammenfassung:</strong> Jede Schicht hat eine klare Verantwortung.<br>
+      HTML validiert Format | Service validiert Logik | Form verwaltet State.</p>
+    </div>
+  </div>
+</body>
+</html>
